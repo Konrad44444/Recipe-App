@@ -2,9 +2,6 @@ package com.course.recipe.repipe_project.domain;
 
 import java.math.BigDecimal;
 
-import org.hibernate.annotations.Cascade;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
