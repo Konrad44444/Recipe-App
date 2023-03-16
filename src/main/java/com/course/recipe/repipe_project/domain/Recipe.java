@@ -9,7 +9,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -21,9 +24,11 @@ public class Recipe {
     private Long id;
 
     private String description;
+    
     private Integer prepTime;
     private Integer cookTime;
     private Integer servings;
+
     private String source;
     private String url;
     private String directions;
@@ -39,6 +44,12 @@ public class Recipe {
     
     @Enumerated(value = EnumType.STRING) //puts strings from enum to db
     private Difficulty difficulty;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+        joinColumns = @JoinColumn(name = "recipe_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
     
     public Long getId() {
         return this.id;
@@ -121,7 +132,6 @@ public class Recipe {
         this.notes = notes;
     }
 
-
     public Set<Ingredient> getIngredients() {
         return this.ingredients;
     }
@@ -136,6 +146,15 @@ public class Recipe {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+
+    public Set<Category> getCategories() {
+        return this.categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
 }
