@@ -2,11 +2,16 @@ package com.course.recipe.repipe_project.domain;
 
 import java.math.BigDecimal;
 
+import org.hibernate.annotations.Cascade;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Ingredient {
@@ -18,7 +23,8 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
-    //private UnitOfMeasuer uom;
+    @OneToOne(fetch = FetchType.EAGER) //get this from db every time
+    private UnitOfMeasure uom;
 
     @ManyToOne
     private Recipe recipe;
@@ -54,6 +60,15 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+
+    public UnitOfMeasure getUom() {
+        return this.uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 
 }
