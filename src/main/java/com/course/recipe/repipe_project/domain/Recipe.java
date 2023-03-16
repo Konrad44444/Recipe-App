@@ -4,6 +4,8 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,18 +27,19 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo add
-    //private Difficulty difficulty;
-
+    
     @Lob //large object
     private Byte[] image;
-
+    
     @OneToOne(cascade = CascadeType.ALL) //recipe is an owner
     private Notes notes;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
-
+    
+    @Enumerated(value = EnumType.STRING) //puts strings from enum to db
+    private Difficulty difficulty;
+    
     public Long getId() {
         return this.id;
     }
@@ -116,6 +119,23 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+
+    public Set<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
 }
