@@ -12,5 +12,16 @@
 <body>
     <h1>Recipe page</h1>
     
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Recipe</th>
+        </tr>
+        <tr th:each="recipe:${recipes}">
+            <td th:text="${recipe.id}">ID</td>
+            <td th:text="${recipe.description}">ad</td>
+        </tr>
+    </table>
 </body>
 </html>
