@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.course.recipe.repipe_project.domain.Recipe;
 import com.course.recipe.repipe_project.repositories.RecipeRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j //logger
 @Service
 public class RecipeServiceImpl implements RecipeService{
 
@@ -21,6 +24,8 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public List<Recipe> getRecipes() {
+        log.debug("Recipe Service");
+
         List<Recipe> recipes = new ArrayList<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
         

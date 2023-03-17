@@ -9,7 +9,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 public class Ingredient {
     
@@ -25,53 +29,15 @@ public class Ingredient {
 
     @ManyToOne
     private Recipe recipe;
-
+    
+    public Ingredient() {
+    }
+    
     public Ingredient(String desc, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
         this.description = desc;
         this.amount = amount;
         this.uom = uom;
         this.recipe = recipe;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return this.amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Recipe getRecipe() {
-        return this.recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-
-    public UnitOfMeasure getUom() {
-        return this.uom;
-    }
-
-    public void setUom(UnitOfMeasure uom) {
-        this.uom = uom;
     }
 
 }

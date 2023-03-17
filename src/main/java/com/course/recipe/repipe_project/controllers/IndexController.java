@@ -4,9 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.course.recipe.repipe_project.repositories.RecipeRepository;
 import com.course.recipe.repipe_project.services.RecipeService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class IndexController {
 
@@ -21,8 +23,8 @@ public class IndexController {
     
     @RequestMapping({"", "/", "/index", "/index.html"})
     public String getIndexPage(Model model) {
-
-       model.addAttribute("recipes", recipeService.getRecipes());
+        log.debug("Index Controller");
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }

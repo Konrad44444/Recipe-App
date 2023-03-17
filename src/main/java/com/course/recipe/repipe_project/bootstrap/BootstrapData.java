@@ -19,6 +19,9 @@ import com.course.recipe.repipe_project.repositories.CategoryRepository;
 import com.course.recipe.repipe_project.repositories.RecipeRepository;
 import com.course.recipe.repipe_project.repositories.UnitOfMeasureRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>{
     private final RecipeRepository recipeRepository;
@@ -82,10 +85,12 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
 
         Notes guacamoleNote = new Notes();
         guacamoleNote.setNote("Be careful handling chilis! If using, it's best to wear food-safe gloves. If no gloves are available, wash your hands thoroughly after handling, and do not touch your eyes or the area near your eyes for several hours afterwards.");
+        
+        //refactor - set note in one method
         guacamoleNote.setRecipe(guacamole);
-
         guacamole.setNotes(guacamoleNote);
 
+        //refactor - addIngredient() method adding recipe to ingredient immedietly
         guacamole.getIngredients().add(new Ingredient("ripe avodacos", new BigDecimal("2"), each, guacamole));
         guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal("0.5"), teaspoon, guacamole));
         guacamole.getIngredients().add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal("2"), tablespoon, guacamole));
@@ -125,6 +130,7 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.debug("Bootstrap");
         recipeRepository.saveAll(getRecipes());
     }
 
