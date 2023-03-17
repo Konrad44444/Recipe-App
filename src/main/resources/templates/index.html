@@ -12,9 +12,11 @@
 <body>
     <h1>Recipe page</h1>
 
-    <p>List of recipes:</p>
-    <ul>
-        <li th:each="recipe:${recipes}" th:text="${recipe.description}">Blabla</li>
-    </ul>
+    <div>
+        <p>List of recipes:</p>
+        <ul>
+            <li th:each="recipe:${recipes}" th:text="${recipe.description}">Blabla</li>
+        </ul>
+    </div>
 </body>
 </html>

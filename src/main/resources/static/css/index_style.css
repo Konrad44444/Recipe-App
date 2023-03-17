@@ -11,3 +11,30 @@ h1 {
     padding: 20px 0px 20px 0px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+p {
+    font-size: larger;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px 20px;
+}
+div {
+    width: 20vw;
+}
+
+ul {
+    list-style: none;
+
+}
+
+li {
+    block-size: auto;
+    font-size:medium;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 5px 40px;
+    transition: all 0.25s ease-in-out;
+}
+
+li:hover {
+    background-color:lightgray;
+    transition: all 0.25s ease-in-out;
+}
