@@ -6,4 +6,5 @@ import com.course.recipe.repipe_project.domain.Recipe;
 
 public interface RecipeService {
     List<Recipe> getRecipes();
+    Recipe findById(Long id);
 }

@@ -80,8 +80,10 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         guacamole.setPrepTime(10);
         guacamole.setCookTime(0);
         guacamole.setServings(4);
-        guacamole.setDifficulty(Difficulty.EASY);
+        guacamole.setDifficulty(Difficulty.Easy);
         guacamole.setDirections("1. Cut the avocados\n2. Mash the avocado flesh\n3. Add the remaining ingredients to taste\n 4. Serve immediately");
+        guacamole.setSource("5");
+        guacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
 
         Notes guacamoleNote = new Notes();
         guacamoleNote.setNote("Be careful handling chilis! If using, it's best to wear food-safe gloves. If no gloves are available, wash your hands thoroughly after handling, and do not touch your eyes or the area near your eyes for several hours afterwards.");
@@ -89,13 +91,13 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         //refactor - set note in one method
         guacamoleNote.setRecipe(guacamole);
         guacamole.setNotes(guacamoleNote);
-
+        
         //refactor - addIngredient() method adding recipe to ingredient immedietly
         guacamole.getIngredients().add(new Ingredient("ripe avodacos", new BigDecimal("2"), each, guacamole));
         guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal("0.5"), teaspoon, guacamole));
         guacamole.getIngredients().add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal("2"), tablespoon, guacamole));
         guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal("0.5"), teaspoon, guacamole));
-
+        
         guacamole.getCategories().add(mexican);
 
         recipes.add(guacamole);
@@ -107,8 +109,10 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         tacos.setPrepTime(5);
         tacos.setCookTime(5);
         tacos.setServings(4);
-        tacos.setDifficulty(Difficulty.MODERATE);
+        tacos.setDifficulty(Difficulty.Moderate);
         tacos.setDirections("1. Heat the pan, prep the ingredients\n2. Butter a tortilla and heat it in the pan until it bubbles\n3. Add cheese\n 4. Flip half of the tortilla over the cheese side\n5. Remove from pan, add extras");
+        tacos.setSource("15");
+        tacos.setUrl("https://www.simplyrecipes.com/recipes/cheese_tacos/");
 
         Notes tacoNote = new Notes();
         tacoNote.setNote("This method makes delicious, buttery, cheesey tacos. If you are avoiding butter, or frying oil (which you could also use), you could make these in a microwave. Soften the tortillas first in the microwave. We use 20 seconds on high per tortilla, with the tortillas sitting on a paper towel in the microwave to absorb moisture. Once they've been softened this way you can add cheese and fold them over and heat them a few seconds more, just until the cheese melts.");
@@ -122,6 +126,7 @@ public class BootstrapData implements ApplicationListener<ContextRefreshedEvent>
         tacos.getIngredients().add(new Ingredient("salsa", new BigDecimal("1"), cup, tacos));
 
         tacos.getCategories().add(american);
+
 
         recipes.add(tacos);
 

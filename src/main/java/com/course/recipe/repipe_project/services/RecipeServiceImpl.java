@@ -2,6 +2,7 @@ package com.course.recipe.repipe_project.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,20 @@ public class RecipeServiceImpl implements RecipeService{
         
         return recipes;
     }
+
+
+    @Override
+    public Recipe findById(Long id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+
+        if(!recipeOptional.isPresent()) {
+            throw new RuntimeException("Recipe not found!");
+        }
+        
+
+        return recipeOptional.get();
+    }
+
+    
     
 }
