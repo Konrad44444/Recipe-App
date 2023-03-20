@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.course.recipe.repipe_project.commands.IngredientCommand;
+import com.course.recipe.repipe_project.commands.RecipeCommand;
+import com.course.recipe.repipe_project.commands.UnitOfMeasureCommand;
 import com.course.recipe.repipe_project.services.IngredientService;
 import com.course.recipe.repipe_project.services.RecipeService;
 import com.course.recipe.repipe_project.services.UnitOfMeasureService;
@@ -62,4 +64,25 @@ public class IngredientController {
         return "redirect:/recipe/" + Long.valueOf(recipeId) + "/ingredient/" + savedCommand.getId() + "/show";
     }
     
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model) {
+        //make sure we have a good id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        if(recipeCommand == null) throw new RuntimeException("Incorrect recipe id value!");
+
+        //need to return back parent id for hidden form property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+
+        model.addAttribute("ingredient", ingredientCommand);
+
+        //init uom
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("uom_list", unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
+    }
 }

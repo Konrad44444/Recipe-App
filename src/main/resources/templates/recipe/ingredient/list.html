@@ -18,7 +18,8 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">Ingredients</h1>
+                    <h1 class="panel-title" style="display:inline;">Ingredients</h1>
+                    <a class="btn btn-primary" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/new'}">New</a>
                 </div>
                 <div class="panel-body">
 
@@ -28,6 +29,7 @@
 
                             <tr>
                                 <th>ID</th>
+                                <th>Amount</th>
                                 <th>Description</th>
                                 <th></th>
                                 <th></th>
@@ -54,7 +56,8 @@
 
                             <tr th:each="ingredient : ${recipe.ingredients}">
                                 <td th:text="${ingredient.id}">334</td>
-                                <td th:text="${ingredient.amount} + ' ' + ${ingredient.uom.getDescription()} + ' ' + ${ingredient.description} + '/show'">Tasty Goodnees 3</td>
+                                <td th:text="${ingredient.amount}">aas</td>
+                                <td  th:text="${ingredient.uom.getDescription()} + ' ' + ${ingredient.description}">Tasty Goodnees 3</td>
                                 <td><a href="#" 
                                         th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/show'}"
                                         class="btn btn-primary">View</a></td>
