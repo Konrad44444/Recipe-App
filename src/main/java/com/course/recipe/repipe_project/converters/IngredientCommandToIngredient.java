@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.course.recipe.repipe_project.commands.IngredientCommand;
 import com.course.recipe.repipe_project.domain.Ingredient;
+import com.course.recipe.repipe_project.domain.Recipe;
 
 @Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
@@ -24,6 +25,14 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
         }
 
         final Ingredient ingredient = new Ingredient();
+
+        if(source.getRecipeId() != null){
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
+            ingredient.setRecipe(recipe);
+            recipe.addIngredient(ingredient);
+        }
+
         ingredient.setId(source.getId());
         ingredient.setAmount(source.getAmount());
         ingredient.setDescription(source.getDescription());

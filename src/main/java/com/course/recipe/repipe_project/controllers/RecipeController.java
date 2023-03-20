@@ -15,6 +15,8 @@ import com.course.recipe.repipe_project.services.RecipeService;
 
 @Controller
 public class RecipeController {
+    private static final String RECIPE = "recipe";
+
     private final RecipeService recipeService;
 
     public RecipeController(RecipeService recipeService) {
@@ -24,7 +26,7 @@ public class RecipeController {
     @GetMapping
     @RequestMapping("/recipe/{id}/show") //id is variable
     public String showById(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findById(Long.parseLong(id)));
+        model.addAttribute(RECIPE, recipeService.findById(Long.parseLong(id)));
 
         return "recipe/show";
     }
@@ -32,7 +34,7 @@ public class RecipeController {
     @GetMapping
     @RequestMapping("recipe/new")
     public String newRecipe(Model model) {
-        model.addAttribute("recipe", new RecipeCommand());
+        model.addAttribute(RECIPE, new RecipeCommand());
 
         return "recipe/recipeform";
     }
@@ -48,7 +50,7 @@ public class RecipeController {
     @GetMapping
     @RequestMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+        model.addAttribute(RECIPE, recipeService.findCommandById(Long.valueOf(id)));
 
         return "recipe/recipeform";
     }

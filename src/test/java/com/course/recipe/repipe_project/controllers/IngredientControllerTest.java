@@ -19,24 +19,28 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.course.recipe.repipe_project.commands.IngredientCommand;
 import com.course.recipe.repipe_project.commands.RecipeCommand;
 import com.course.recipe.repipe_project.services.IngredientService;
-import com.course.recipe.repipe_project.services.RecipeService;    
+import com.course.recipe.repipe_project.services.RecipeService;
+import com.course.recipe.repipe_project.services.UnitOfMeasureService;    
     
 public class IngredientControllerTest {
     @Mock
-    RecipeService recipeService;
+    IngredientService ingredientService;
 
     @Mock
-    IngredientService ingredientService;
+    UnitOfMeasureService unitOfMeasureService;
+
+    @Mock
+    RecipeService recipeService;
 
     IngredientController controller;
 
     MockMvc mockMvc;
 
     @BeforeEach
-    public void setup(){
+    public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
 
-        controller = new IngredientController(recipeService, ingredientService);
+        controller = new IngredientController(recipeService, ingredientService, unitOfMeasureService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
         

@@ -69,7 +69,7 @@ public class RecipeServiceImplTest {
 
         List<Recipe> recipes = recipeService.getRecipes();
 
-        assertEquals(recipes.size(), 1);
+        assertEquals(1, recipes.size());
 
         verify(recipeRepository, times(1)).findAll(); //recipe repository was called only once [used by recipeService.getRecipes()]
     }
