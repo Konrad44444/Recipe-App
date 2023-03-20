@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.course.recipe.repipe_project.commands.IngredientCommand;
 import com.course.recipe.repipe_project.commands.RecipeCommand;
 import com.course.recipe.repipe_project.converters.RecipeCommandToRecipe;
 import com.course.recipe.repipe_project.converters.RecipeToRecipeCommand;
@@ -72,6 +73,5 @@ public class RecipeServiceImpl implements RecipeService{
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);        
     }
- 
-    
+     
 }
