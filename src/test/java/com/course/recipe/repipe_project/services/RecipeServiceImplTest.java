@@ -1,4 +1,5 @@
 package com.course.recipe.repipe_project.services;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -11,14 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.junit.jupiter.api.function.Executable;
 
 import com.course.recipe.repipe_project.converters.RecipeCommandToRecipe;
 import com.course.recipe.repipe_project.converters.RecipeToRecipeCommand;
 import com.course.recipe.repipe_project.domain.Recipe;
+import com.course.recipe.repipe_project.exceptions.NotFoundException;
 import com.course.recipe.repipe_project.repositories.RecipeRepository;    
     
 public class RecipeServiceImplTest {
@@ -86,6 +90,24 @@ public class RecipeServiceImplTest {
 
         //then
         verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void getRecipeByIdNotFound() throws Exception {
+        Assertions.assertThrows(NotFoundException.class, new Executable() {
+
+            @Override
+            public void execute() throws Throwable {
+                Optional<Recipe> recipeOptional = Optional.empty();
+
+                when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+                Recipe recipeReturned = recipeService.findById(1L);
+    
+                //should go boom
+            }
+        });
+        
     }
 }
     

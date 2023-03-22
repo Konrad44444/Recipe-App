@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.course.recipe.repipe_project.commands.RecipeCommand;
 import com.course.recipe.repipe_project.domain.Recipe;
+import com.course.recipe.repipe_project.exceptions.NotFoundException;
 import com.course.recipe.repipe_project.services.RecipeService;
 
 public class RecipeControllerTest {
@@ -99,5 +100,16 @@ public class RecipeControllerTest {
             .andExpect(view().name("redirect:/"));
 
         verify(recipeService, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+        
+        mockMvc.perform(get("/recipe/1/show"))
+            .andExpect(status().isNotFound());
     }
 }
