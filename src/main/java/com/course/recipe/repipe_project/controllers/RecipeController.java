@@ -1,18 +1,24 @@
 package com.course.recipe.repipe_project.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.course.recipe.repipe_project.commands.RecipeCommand;
+import com.course.recipe.repipe_project.exceptions.NotFoundException;
 import com.course.recipe.repipe_project.services.RecipeService;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Controller
 public class RecipeController {
     private static final String RECIPE = "recipe";
@@ -24,10 +30,11 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/{id}/show") //id is variable
-    public String showById(@PathVariable String id, Model model) {
-        model.addAttribute(RECIPE, recipeService.findById(Long.parseLong(id)));
+    public String showById(@PathVariable String id, Model model) { 
+            model.addAttribute(RECIPE, recipeService.findById(Long.parseLong(id)));
+            
+            return "recipe/show";
 
-        return "recipe/show";
     }
 
     @GetMapping("recipe/new")
@@ -57,6 +64,21 @@ public class RecipeController {
         recipeService.deleteById(Long.parseLong(id));
 
         return "redirect:/";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class) 
+    public ModelAndView handleNotFount(Exception exception) {
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
+        
+
+        return modelAndView;
+        
     }
 
 }
